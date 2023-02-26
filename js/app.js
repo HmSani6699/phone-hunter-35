@@ -8,6 +8,17 @@ const loadData = async (searchText) => {
 const displayData = phones => {
     const phoneContainer = document.getElementById('container');
     phoneContainer.innerHTML = '';
+    //display 10 phone
+    phones = phones.slice(0, 10)
+    // No pone found
+    const noPhone = document.getElementById('noPhone');
+    if (phones.length === 0) {
+        noPhone.classList.remove('hidden')
+    }
+    else {
+        noPhone.classList.add('hidden')
+    }
+    //display phone
     phones.forEach(phone => {
         const phoneDiv = document.createElement('div');
         phoneDiv.classList.add('card', 'w-full', 'bg-base-100', 'shadow-xl', 'border');
@@ -39,4 +50,4 @@ document.getElementById('search-button').addEventListener('click', function () {
     const searchText = document.getElementById('input-filed').value;
     loadData(searchText)
 })
-loadData()
+// loadData()
