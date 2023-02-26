@@ -1,19 +1,27 @@
-const loadData = async (searchText) => {
+const loadData = async (searchText, dataLimit) => {
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
     const res = await fetch(url);
     const data = await res.json();
-    displayData(data.data)
+    displayData(data.data, dataLimit)
 }
 
-const displayData = phones => {
+const displayData = (phones, dataLimit) => {
     const phoneContainer = document.getElementById('container');
     phoneContainer.innerHTML = '';
     //display 10 phone
-    phones = phones.slice(0, 10)
+    const showAll = document.getElementById('showAll')
+    if (dataLimit && phones.length > 10) {
+        phones = phones.slice(0, 10);
+        showAll.classList.remove('hidden')
+    }
+    else {
+        showAll.classList.add('hidden')
+    }
     // No pone found
     const noPhone = document.getElementById('noPhone');
     if (phones.length === 0) {
-        noPhone.classList.remove('hidden')
+        noPhone.classList.remove('hidden');
+        spinner(false)
     }
     else {
         noPhone.classList.add('hidden')
@@ -35,19 +43,63 @@ const displayData = phones => {
                     whose shoes does he
                     choose?</p>
                 <div class="card-actions">
-                    <button
-                        class="btn btn-primary">Buy
-                        Now</button>
+                        <label for="my-modal" class="btn btn-primary"
+                         onclick="loadDisplayDetails('${phone.slug}')">Details</label>
                 </div>
             </div>
         `;
-        phoneContainer.appendChild(phoneDiv)
-        // console.log(phone)
+        phoneContainer.appendChild(phoneDiv);
+
+        //loading spinner 
+        spinner(false)
     });
 }
 
-document.getElementById('search-button').addEventListener('click', function () {
+const common = (number) => {
+    //loading spinner
+    spinner(true)
     const searchText = document.getElementById('input-filed').value;
-    loadData(searchText)
-})
-// loadData()
+    loadData(searchText, number);
+}
+
+document.getElementById('search-button').addEventListener('click', function () {
+    common(10)
+});
+// show all 
+document.getElementById('show-all-button').addEventListener('click', function () {
+    common()
+});
+
+document.getElementById('input-filed').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        common(10)
+    }
+});
+
+
+//spinner 
+const spinner = (isLoading) => {
+    const loadIngSpinner = document.getElementById('loadingSpinner')
+    if (isLoading) {
+        loadIngSpinner.classList.remove('hidden')
+    }
+    else {
+        loadIngSpinner.classList.add('hidden')
+    }
+}
+
+// details display
+const loadDisplayDetails = async (id) => {
+    const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    displayDetails(data.data)
+}
+
+const displayDetails = (phone) => {
+    const images = document.getElementById('images');
+    images.setAttribute('src', `${phone.image}`)
+    document.getElementById('title').innerText = phone.name;
+
+}
+

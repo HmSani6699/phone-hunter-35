@@ -21,8 +21,7 @@
     <header>
         <h2
             class="text-5xl text-center font-bold mt-8">
-            Welcome
-            Phone Hunter vai !!</h2>
+            Phone Hunter website</h2>
     </header>
 
     <main>
@@ -51,17 +50,76 @@
                 </div>
             </div>
         </section>
-        <section id="noPhone" class="hidden">
-            <h2
-                class="text-3xl font-bold text-red-700 text-center mt-24">
-                No phone found ! please try to new
-                search</h2>
-        </section>
         <!-- display phone -->
         <section>
             <div id="container"
                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-9/12 mx-auto mt-12 gap-4">
 
+            </div>
+        </section>
+        <!-- spinner -->
+        <section id="loadingSpinner"
+            class="hidden">
+            <div
+                class="w-full h-full text-gray-900 grid grid-cols-1 grid-rows-1 place-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    width="50" height="50"
+                    fill="currentColor"
+                    class="bi bi-arrow-repeat animate-spin"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
+                    <path fill-rule="evenodd"
+                        d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
+                </svg>
+            </div>
+            </div>
+        </section>
+        <!-- no phone found -->
+        <section>
+            <div id="noPhone" class="hidden">
+                <h2
+                    class="text-3xl font-bold text-red-700 text-center mt-24">
+                    No phone found ! please try to
+                    new
+                    search</h2>
+            </div>
+
+            <!-- show all -->
+            <div id="showAll"
+                class="mt-8 flex justify-center hidden">
+                <button id="show-all-button"
+                    class="btn ">Show
+                    all</button>
+            </div>
+        </section>
+        <!-- details display -->
+        <section>
+            <!-- The button to open modal -->
+            <input type="checkbox" id="my-modal"
+                class="modal-toggle" />
+
+            <div class="modal">
+                <div
+                    class="modal-box text-center">
+                    <div
+                        class="flex justify-center mb-4">
+                        <img id="images" alt="">
+                    </div>
+                    <h3 id="title"
+                        class="font-bold text-lg">
+                    </h3>
+                    <p id="discripton"
+                        class="py-4">You've been
+                        selected for a chance to
+                        get one year of
+                        subscription to use
+                        Wikipedia for free!</p>
+                    <div class="modal-action">
+                        <label for="my-modal"
+                            class="btn btn-error text-white">Cancel</label>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
